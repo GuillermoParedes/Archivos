@@ -39,17 +39,19 @@ public class MainActivity extends ActionBarActivity {
             linea = new String(bs.toByteArray(),"UTF-8");
             TextView tv = (TextView) findViewById(R.id.textView2);
             tv.setText(linea);*/
-            InputStream fraw =
-                    getResources().openRawResource(R.raw.archivo);
+            InputStream fraw = getResources().openRawResource(R.raw.archivo);
 
             BufferedReader brin =  new BufferedReader(new InputStreamReader(fraw));
 
-            String linea = brin.readLine();
 
+
+            String linea = brin.readLine();
+            String linea2 = brin.readLine();
+            String linea3 = brin.readLine();
             fraw.close();
             //linea = new String(bs.toByteArray(),"UTF-8");
             TextView tv = (TextView) findViewById(R.id.textView2);
-            tv.setText(linea);
+            tv.setText(linea +"/n" +linea2 +"/n" +linea3  );
 
         }
         catch (IOException e){
