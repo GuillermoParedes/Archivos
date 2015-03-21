@@ -3,14 +3,17 @@ package bo.umsa.archivos.archivos;
 import android.content.res.AssetManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -23,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void paraListar(View view){
         try {
-            AssetManager p = getAssets();
+            /*AssetManager p = getAssets();
             InputStream lector = p.open("archivo.txt");
             String linea;
             int largo = 0;
@@ -35,10 +38,23 @@ public class MainActivity extends ActionBarActivity {
             lector.close();
             linea = new String(bs.toByteArray(),"UTF-8");
             TextView tv = (TextView) findViewById(R.id.textView2);
+            tv.setText(linea);*/
+            InputStream fraw =
+                    getResources().openRawResource(R.raw.archivo);
+
+            BufferedReader brin =  new BufferedReader(new InputStreamReader(fraw));
+
+            String linea = brin.readLine();
+
+            fraw.close();
+            //linea = new String(bs.toByteArray(),"UTF-8");
+            TextView tv = (TextView) findViewById(R.id.textView2);
             tv.setText(linea);
+
         }
         catch (IOException e){
             e.printStackTrace();
+            Log.e("Ficheros", "Error al leer fichero desde recurso raw");
         }
 
 
